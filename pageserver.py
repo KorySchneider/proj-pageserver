@@ -70,20 +70,39 @@ STATUS_FORBIDDEN = "HTTP/1.0 403 Forbidden\n\n"
 STATUS_NOT_FOUND = "HTTP/1.0 404 Not Found\n\n"
 STATUS_NOT_IMPLEMENTED = "HTTP/1.0 401 Not Implemented\n\n"
 
+def isValidURL(string):
+    valid = False
+    if string.endswith('.html') or string.endswith('.css'):
+        if not '..' in string and not '~' in string and not '//' in string:
+            valid = True
+    return valid
+
 def respond(sock):
     """
     This server responds only to GET requests (not PUT, POST, or UPDATE).
     Any valid GET request is answered with an ascii graphic of a cat. 
     """
-    sent = 0
     request = sock.recv(1024)  # We accept only short requests
     request = str(request, encoding='utf-8', errors='strict')
     print("\nRequest was {}\n".format(request))
 
     parts = request.split()
     if len(parts) > 1 and parts[0] == "GET":
-        transmit(STATUS_OK, sock)
-        transmit(CAT, sock)
+        response = None
+        if isValidURL(parts[1]):
+            try:
+                response = open('pages'+parts[1], 'r').read()
+            except FileNotFoundError:
+                transmit(STATUS_NOT_FOUND, sock)
+                transmit('404', sock)
+        else:
+            transmit(STATUS_NOT_FOUND, sock)
+            transmit('404', sock)
+
+        if response is not None:
+            transmit(STATUS_OK, sock)
+            transmit(response, sock)
+            reseponse.close()
     else:
         transmit(STATUS_NOT_IMPLEMENTED, sock)        
         transmit("\nI don't handle this request: {}\n".format(request), sock)
