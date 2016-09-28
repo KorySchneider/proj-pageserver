@@ -96,8 +96,8 @@ def respond(sock):
                 transmit(STATUS_NOT_FOUND, sock)
                 transmit('404', sock)
         else:
-            transmit(STATUS_NOT_FOUND, sock)
-            transmit('404', sock)
+            transmit(STATUS_FORBIDDEN, sock)
+            transmit('403', sock)
 
         if response is not None:
             transmit(STATUS_OK, sock)
