@@ -91,7 +91,8 @@ def respond(sock):
         response = None
         if isValidURL(parts[1]):
             try:
-                response = open('pages'+parts[1], 'r').read()
+                responseFile = open('pages'+parts[1], 'r')
+                response = responseFile.read()
             except FileNotFoundError:
                 transmit(STATUS_NOT_FOUND, sock)
                 transmit('404', sock)
@@ -102,7 +103,7 @@ def respond(sock):
         if response is not None:
             transmit(STATUS_OK, sock)
             transmit(response, sock)
-            reseponse.close()
+            responseFile.close()
     else:
         transmit(STATUS_NOT_IMPLEMENTED, sock)        
         transmit("\nI don't handle this request: {}\n".format(request), sock)
