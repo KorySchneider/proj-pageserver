@@ -1,48 +1,27 @@
-# README #
+# README
 
-A "getting started" project for CIS 322, software engineering 1 at University of Oregon.
+### What is this?
 
-### What is this repository for? ###
+This is a very (VERY) simple web server written in python. It only serves html and css files.
 
-* The objectives of this mini-project are:
-  * Initial experience with GIT workflow:  Fork the project, make and test changes locally, commit;  turn in repository URL
-  * Initial experience with automated configuration for turnkey installation
-  * Extend a tiny web server in Python, to check understanding of basic web architecture
-  * Use automated tests to check progress (plus manual tests for good measure)
+### Installation
 
-### What do I need?  Where will it work? ###
+To get this server up and running, execute the following commands:
 
-* Designed for Unix, mostly interoperable on Linux (Ubuntu) or MacOS.
-  Target environment is Raspberry Pi. 
-  ** May also work on Windows, but no promises.  A Linux virtual machine
-   may work, but our experience has not been good; if you don't have a 
-   Raspberry Pi in hand yet, you may want to test on shared server ix. 
-* You will need Python version 3.4 or higher. 
-* Designed to work in "user mode" (unprivileged), therefore using a port 
-  number above 1000 (rather than port 80 that a privileged web server would use)
+    $ cd path/where/you/want/it
+    $ git clone https://github.com/KorySchneider/proj-pageserver
+    $ make
 
-### Assignment ###
-* Fork this repository to create your own repository on Github.  (Read the 'git' documentation as needed, and create an account on Github if you don't have one.) 
-* Clone your repository onto the machine you want to work on.
-* Make and test your changes.  Use both automated tests (the script in
-the 'tests' directory) and some manual tests.  In addition to your
-development environment, test on a Raspberry Pi running Ubuntu. 
-* Revise this README.md file:  Erase what is no longer relevant and 
-  add identifying information. 
-  ### Author: Lil (Nancy) Magill , jill@uoregon.edu ###
+This will build/install the server and start it up on port 8000. Open up your browser and navigate to "localhost:8000/trivia.html" to make sure it is working. 
 
-* Commit and push ALL your changes to github (except those not under 
-  revision control)
-* Test deployment to other environments including Raspberry Pi.  Deployment 
-  should work "out of the box" with this command sequence: 
-  ** git clone <yourGitRepository> <targetDirectory>
-  ** cd <targetDirectory>
-  ** make configure
-  ** make run 
-  ** (control-C to stop program)
-* Turn in the github or URL to your repository
+### Usage
 
-### Who do I talk to? ###
+To run the server, run the following command:
 
-* Maintained by Michal Young, michal@cs.uoregon.edu
-* Use our Piazza group for questions. Make them public (anonymous or not as you prefer) unless you have a good reason to make them private, so that everyone benefits from answers and discussion. 
+    $ python3 pageserver.py -p <port>
+
+where `<port>` is a number between 1024 and 10000.
+
+### Credit
+
+Forked from Michal Young at https://github.com/UO-CIS-322/proj-pageserver for CIS 322: Intro to Software Engineering.
