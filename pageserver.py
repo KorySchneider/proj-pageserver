@@ -5,12 +5,6 @@
   This trivial implementation is not robust:  We have omitted decent
   error handling and many other things to keep the illustration as simple
   as possible. 
-
-  FIXME:
-  Currently this program always serves an ascii graphic of a cat.
-  Change it to serve files if they end with .html or .css, and are
-  located in ./pages  (where '.' is the directory from which this
-  program is run).  
 """
 
 import CONFIG    # Configuration options. Create by editing CONFIG.base.py
@@ -51,17 +45,7 @@ def serve(sock, func):
         (clientsocket, address) = sock.accept()
         _thread.start_new_thread(func, (clientsocket,))
 
-
-##
-## Starter version only serves cat pictures. In fact, only a
-## particular cat picture.  This one.
-##
-CAT = """
-     ^ ^
-   =(   )=
-"""
-
-## HTTP response codes, as the strings we will actually send. 
+## HTTP response codes
 ##   See:  https://en.wikipedia.org/wiki/List_of_HTTP_status_codes
 ##   or    http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
 ## 
